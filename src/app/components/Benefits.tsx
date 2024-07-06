@@ -1,9 +1,14 @@
+"use client"
+
 import React from 'react'
 
+import { Canvas } from 'react-three-fiber'
+import { Environment, OrbitControls } from '@react-three/drei'
+import { ThreeScene } from './ThreeScene'
 function Benefits() {
   return (
-    <div className='bg-gradient-to-b from-black to-gray-900 h-screen'>
-        
+    <div className=' relative h-screen'>
+      
     </div>
   )
 }

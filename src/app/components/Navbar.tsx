@@ -13,7 +13,7 @@ function navbar() {
           </div> */}
 
           <div>
-            <h2 className='font-extrabold'>STICKER HIVE</h2>
+            <h2 className='font-extrabold text-lg'>STICKER HIVE</h2>
 
           </div>
 
