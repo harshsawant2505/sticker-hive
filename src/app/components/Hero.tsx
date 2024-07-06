@@ -5,11 +5,13 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Environment, OrbitControls } from '@react-three/drei'
 import { ThreeScene } from './ThreeScene'
 import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
 
+// new heroes with 3d objects
 const CustomOrbitControls = () => {
     const controlsRef = useRef<any>();
     const { camera } = useThree();
+
+  
   
     useEffect(() => {
       if (controlsRef.current) {
@@ -55,8 +57,7 @@ function Hero() {
                 <button className='px-4 mt-3 py-2 bg-white text-black rounded-xl font-bold'>Create Now</button>
             </div>
            
-                    {/* <img src="/assets/cropped_3d-kyboard.jpg" className='h-full w-full' alt="" />
-                     */}
+               
                   <div className=' absolute h-[600px]  right-10 w-[50%] '>
 
                
@@ -68,16 +69,7 @@ function Hero() {
                         </Canvas>
                 </div>
           
-            {/* <div className='w-[25%]'>
-                <h1 className='font-semibold w-30 text-[20px] text-[#7F00FF]'>STICKER TEMPLATE  <br />
-                GENERATOR</h1>
-                <p className='text-[15px] my-2'>
-                Create your own stickers by selecting 
-                your character from our wide range of
-                character combinations.
-                </p>
-                <button className='px-4 mt-3 py-2 bg-white text-black rounded-xl'>Create Now</button>
-            </div> */}
+          
         </div>
        
 
