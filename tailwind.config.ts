@@ -16,6 +16,8 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-text-stroke'),
+  ],
 };
 export default config;
