@@ -13,14 +13,14 @@ function navbar() {
           </div> */}
 
           <div>
-            <h2 className='font-extrabold text-lg'>STICKER HIVE</h2>
+            <Link className='font-extrabold text-lg' href={'/'}>STICKER HIVE</Link>
 
           </div>
 
           <div className='flex gap-12 items-center'>
             <Link href={"/"}>Home</Link>
             <Link href={"/about"}>About</Link>
-            <Link href={"/contact"}>Contact</Link>
+            <Link href={"/create"}>Create</Link>
             <Link href={"/contact"}>Contact</Link>
             <FaUser className='text-4xl bg-gray-400 rounded-full px-2 ml-10 hover:cursor-pointer py-0' />
           </div>
