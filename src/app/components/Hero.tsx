@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useThree } from '@react-three/fiber';
 import { Environment, OrbitControls } from '@react-three/drei'
 import { ThreeScene } from './ThreeScene'
 import { useEffect, useRef } from 'react';
@@ -10,11 +10,13 @@ import { motion} from "framer-motion"
 // new heroes with 3d objects
 
 const CustomOrbitControls = () => {
+
+
     const controlsRef = useRef<any>();
     const { camera } = useThree();
 
-  
-  
+
+    // use to limit the rotation //
     useEffect(() => {
       if (controlsRef.current) {
         // Set default position
@@ -29,14 +31,14 @@ const CustomOrbitControls = () => {
       }
     }, [camera]);
  
-    return <OrbitControls ref={controlsRef} />;
+    return <OrbitControls ref={controlsRef} />; // returning custom orbit control
   };
 
 function Hero() {
     
 
   return (
-    <motion.div className='bg-custom-gradient overflow-hidden m-0 h-screen relative '
+    <motion.div className='bg-custom-gradient lg:block hidden overflow-hidden m-0 h-screen relative '
     initial={{y:20, opacity:0}}
     animate={{y:0,opacity:1}}
     transition={{duration:1,delay:0.5}}>
@@ -54,6 +56,7 @@ function Hero() {
         </motion.div>
 
         <div className='z-10 absolute w-full bottom-32 flex borer justify-between items-center gap-7 px-16 pl-32 '>
+
             <div className='w-[40%] m-0 '>
                 <h1 className='font-bold   text-[27px] text-[#7F00FF]'>STICKER TEMPLATE  
                 GENERATOR</h1>
@@ -73,11 +76,11 @@ function Hero() {
 
                
                         <Canvas >
-                        <Environment preset='studio'/>
-                        <CustomOrbitControls/>
-                        <ThreeScene />
-                        
+                          <Environment preset='studio'/>
+                          <CustomOrbitControls/>
+                          <ThreeScene /> 
                         </Canvas>
+
                 </motion.div>
           
           
