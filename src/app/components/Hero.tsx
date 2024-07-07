@@ -6,6 +6,7 @@ import { Environment, OrbitControls } from '@react-three/drei'
 import { ThreeScene } from './ThreeScene'
 import { useEffect, useRef } from 'react';
 import { motion} from "framer-motion"
+import Link from 'next/link';
 
 // new heroes with 3d objects
 
@@ -57,7 +58,8 @@ function Hero() {
 
         <div className='z-10 absolute w-full bottom-32 flex borer justify-between items-center gap-7 px-16 pl-32 '>
 
-            <div className='w-[40%] m-0 '>
+            <motion.div className='w-[40%] m-0 h-fit '
+          >
                 <h1 className='font-bold   text-[27px] text-[#7F00FF]'>STICKER TEMPLATE  
                 GENERATOR</h1>
                 <p className='text-[14px] my-2 text-gray-400'>
@@ -65,8 +67,8 @@ function Hero() {
                 your character from our wide range of
                 character combinations.Sticker Hive simplifies creating sticker templates by eliminating the need for complex editing software, making the process fast, easy, and accessible for everyone.
                 </p>
-                <button className='px-4 mt-3 py-2 bg-white text-black rounded-xl font-bold'>Create Now</button>
-            </div>
+                <Link href={"/create"} className="text-red mt-5 flex justify-center items-center hover:before:bg-redborder-[#7F00FF] relative h-[40px] rounded-lg w-36 overflow-hidden border border-[#7F00FF] bg-white px-3 text-[#7F00FF] shadow-2xl transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-[#7F00FF] before:transition-all before:duration-500 hover:text-white hover:shadow-[#7F00FF] hover:before:left-0 hover:before:w-full"><span className="relative z-10">Create Now</span></Link>
+            </motion.div>
            
                
                   <motion.div className=' absolute h-[600px]  right-10 w-[50%] '

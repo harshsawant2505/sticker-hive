@@ -20,7 +20,7 @@ const menuButtonStyle = {
   return (
     
         <div>
-        <nav className='w-full hidden  text-white  h-14 py-8 sm:flex justify-between items-center px-16 bg-custom-gradient  border-b-[1px]   border-[#1F2937] ' >
+        <nav className='w-full hidden  text-white  h-14 py-8 lg:flex justify-between items-center px-16 bg-custom-gradient  border-b-[1px]   border-[#1F2937] ' >
           {/* <div className='flex gap-10 items-center'>
             <Link href={"/"}>Home</Link>
             <Link href={"/about"}>About</Link>
@@ -28,22 +28,22 @@ const menuButtonStyle = {
           </div> */}
 
           <div>
-            <Link className='font-extrabold text-lg' href={'/'}>STICKER HIVE</Link>
+            <Link className='h-full w-fit flex items-center mt-1' href={'/'}><img className='w-48 ' src='/assets/stickerHive.png'/></Link>
 
           </div>
 
           <div className='flex gap-12 items-center'>
-            <Link href={"/"}>Home</Link>
-            <Link href={"/about"}>About</Link>
-            <Link href={"/create"}>Create</Link>
-            <Link href={"/contact"}>Contact</Link>
+            <Link  className='hover:text-[#7F00FF]' href={"/"} >Home</Link>
+            <Link className='hover:text-[#7F00FF]' href={"/about"}>About</Link>
+            <Link className='hover:text-[#7F00FF]' href={"/create"}>Create</Link>
+            <Link className='hover:text-[#7F00FF]' href={"/contact"}>Contact</Link>
             <FaUser className='text-4xl bg-gray-400 rounded-full px-2 ml-10 hover:cursor-pointer py-0' />
           </div>
           
         </nav>
 
-        <nav className='w-full flex fixed text-white  h-14 py-8 sm:hidden justify-between items-center px-8 bg-custom-gradient  border-b-[1px]   border-[#1F2937] ' >
-              <Link href={"/"} className='font-bold'>Sticker Hive</Link>
+        <nav className='w-full flex fixed text-white  h-14 py-8 lg:hidden justify-between items-center px-8 bg-custom-gradient  border-b-[1px]   border-[#1F2937] ' >
+        <Link className='h-full w-fit flex items-center mt-1' href={'/'}><img className='w-48 ' src='/assets/stickerHive.png'/></Link>
               <AnimatePresence>
               {menu &&
               
