@@ -57,7 +57,7 @@ const NewFooter = () => {
           className={`h-full w-full md:w-1/3   flex flex-col sm:gap-10  gap-6 sm:w-[17.75rem] md:p-4`}
         >
           <h4 className="font-semibold lg:text-3xl md:text-2xl">Follow Us On</h4>
-          <div className="flex sm:flex-col sm:justify-center justify-normal sm:gap-0 gap-3">
+          <div className="flex sm:flex-col sm:justify-center justify-normal sm:gap-0 gap-3 flex-wrap">
             <Link href={""} className="flex sm:gap-4 gap-1 items-center">
               <FaFacebook className="sm:size-6 size-4" />{" "}
               <p className="lg:text-2xl md:text-xl text-sm text-[#E9E9E9]">FaceBook</p>
