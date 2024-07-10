@@ -39,7 +39,7 @@ function Hero() {
     
 
   return (
-    <motion.div className='bg-custom-gradient lg:block hidden overflow-hidden m-0 h-screen relative '
+    <motion.div className='bg-gradient-to-r from-black to-gray-900 text-white lg:block hidden overflow-hidden m-0 h-screen relative '
     initial={{y:20, opacity:0}}
     animate={{y:0,opacity:1}}
     transition={{duration:1,delay:0.5}}>
