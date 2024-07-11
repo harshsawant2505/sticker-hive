@@ -20,7 +20,7 @@ const menuButtonStyle = {
   return (
     
         <div>
-        <nav className='w-full hidden  text-white  h-14 py-8 lg:flex justify-between items-center px-16 bg-custom-gradient  border-b-[1px]   border-[#1F2937] ' >
+        <nav className='w-full hidden bg-gradient-to-r from-black to-gray-900  text-white  h-14 py-8 lg:flex justify-between items-center px-16 bg-custom-gradient  border-b-[1px]   border-[#1F2937] ' >
           {/* <div className='flex gap-10 items-center'>
             <Link href={"/"}>Home</Link>
             <Link href={"/about"}>About</Link>
