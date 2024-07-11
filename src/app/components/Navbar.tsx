@@ -8,7 +8,7 @@ import { FaBurger, FaNoteSticky, FaPencil, FaX } from 'react-icons/fa6';
 import { MenuToggle } from './MenuButton';
 import { CiMenuBurger } from 'react-icons/ci';
 
-function navbar() {
+function Navbar() {
 
 
 
@@ -19,7 +19,7 @@ const menuButtonStyle = {
 
   return (
     
-        <div>
+        <div className='overflow-hidden'>
         <nav className='w-full hidden bg-gradient-to-r from-black to-gray-900  text-white  h-14 py-8 lg:flex justify-between items-center px-16 bg-custom-gradient  border-b-[1px]   border-[#1F2937] ' >
           {/* <div className='flex gap-10 items-center'>
             <Link href={"/"}>Home</Link>
@@ -107,7 +107,7 @@ const menuButtonStyle = {
   )
 }
 
-export default navbar
+export default Navbar
 
 function variant(arg0: {}, arg1: {}) {
   throw new Error('Function not implemented.');
