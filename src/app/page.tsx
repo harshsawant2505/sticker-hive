@@ -12,12 +12,12 @@ export default function Home() {
 
 
   return (
-    <div  className="bg-custom-gradient overflow-hidden "
+    <div  className="bg-gradient-to-r from-black to-gray-900 overflow-hidden "
     
       >
         <Navbar/> 
         <Hero />
-        <Benefits />
+        <Benefits /> 
         <NewFooter />
      
       </div>  
