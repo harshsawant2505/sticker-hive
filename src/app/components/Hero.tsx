@@ -39,39 +39,40 @@ function Hero() {
     
 
   return (
-    <motion.div className='bg-custom-gradient lg:block hidden overflow-hidden m-0 h-screen relative '
+    <motion.div className='bg-custom-gradient   overflow-hidden m-0 h-screen relative '
     initial={{y:20, opacity:0}}
     animate={{y:0,opacity:1}}
     transition={{duration:1,delay:0.5}}>
 
         <div className='w-full pt-24   gap-0 flex flex-col justify-center p-0 items-center  '>
-            <h2 className='  text-[35px] p-0 m-0   '>CREATE WHAT YOU LIKE AT</h2>
-            <h1 className=' leading-10 m-0 lg:text-[180px] text-[100px] py-12 font-extrabold '>STICKER HIVE</h1>
+            <h2 className=' hidden md:block text-[35px] p-0 m-0   '>CREATE WHAT YOU LIKE AT</h2>
+            <h1 className=' leading-10 m-2 md:m-0  text-[45px] sm:text-[50px] md:text-[100px]   py-12 font-extrabold '>STICKER HIVE</h1>
         </div>
 
-        <motion.div className='object-contain absolute z-0 bottom-0 w-full '
+        <motion.div className='object-contain absolute z-0 sm:bottom-0 w-full '
         initial={{y:"10vw",opacity:0}}
         animate = {{y:0,opacity:1}}
         transition={{type:"tween",delay:1}}>
-             <img src="/assets/cropped-mountain-2.png " className='w-full h-full scale-y-105 ' alt="" />
+             <img src="/assets/cropped-mountain-2.png " className='bg-contain w-full h-full scale-x-[2] sm:scale-x-0 scale-y-[2.5] sm:scale-y-150 sm:scale-y-105 ' alt="" />
         </motion.div>
 
-        <div className='z-10 absolute w-full bottom-32 flex borer justify-between items-center gap-7 px-16 pl-32 '>
+        <div className='z-10 absolute  w-full bottom-20 sm:bottom-32 flex flex-col-reverse md:flex-row borer justify-between items-center gap-7 px-16 pl-32 '>
 
-            <motion.div className='w-[40%] m-0 h-fit '
+            <motion.div className='w-[80vw] md:w-[40%] m-0 h-fit '
           >
-                <h1 className='font-bold   text-[27px] text-[#7F00FF]'>STICKER TEMPLATE  
+                <h1 className='font-bold text-[20px] md:text-[27px] min-w-80vw text-[#7F00FF] z-10'>STICKER TEMPLATE  
                 GENERATOR</h1>
-                <p className='text-[14px] my-2 text-gray-400'>
+                <p className='text-[14px] my-2 text-gray-400 max-h-[50px] md:max-h-none'>
                 Create your own stickers by selecting 
                 your character from our wide range of
-                character combinations.Sticker Hive simplifies creating sticker templates by eliminating the need for complex editing software, making the process fast, easy, and accessible for everyone.
+                character combinations.
+                <p className='hidden md:block'>Sticker Hive simplifies creating sticker templates by eliminating the need for complex editing software, making the process fast, easy, and accessible for everyone.</p>
                 </p>
                 <Link href={"/create"} className="text-red mt-5 flex justify-center items-center hover:before:bg-redborder-[#7F00FF] relative h-[40px] rounded-lg w-36 overflow-hidden border border-[#7F00FF] bg-white px-3 text-[#7F00FF] shadow-2xl transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-[#7F00FF] before:transition-all before:duration-500 hover:text-white hover:shadow-[#7F00FF] hover:before:left-0 hover:before:w-full"><span className="relative z-10">Create Now</span></Link>
             </motion.div>
            
                
-                  <motion.div className=' absolute h-[600px]  right-10 w-[50%] '
+                  <motion.div className='h-80 absolute md:h-[600px] mt-20 right-1 bottom-36 md:right-10 md:w-[50%] '
                   initial={{x:"100vw"}}
                    animate = {{x:0}}
                    transition={{type:"spring",delay:0.5,stiffness:80}}>
