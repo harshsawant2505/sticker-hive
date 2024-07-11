@@ -12,7 +12,7 @@ export default function Home() {
 
 
   return (
-    <div  className="bg-custom-gradient overflow-hidden "
+    <div  className="bg-black  overflow-hidden "
     
       >
         <Navbar/> 
