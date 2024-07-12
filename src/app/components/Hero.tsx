@@ -8,6 +8,16 @@ import { useEffect, useRef } from 'react';
 import { motion } from "framer-motion"
 import Link from 'next/link';
 
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+
+
 // new heroes with 3d objects
 
 const CustomOrbitControls = () => {
@@ -22,6 +32,7 @@ const CustomOrbitControls = () => {
     if (controlsRef.current) {
       // Set default position
       camera.position.set(0.2, 6, 1);
+      //  camera.position.set(1, 2, 3);
 
       // Limit rotation
       controlsRef.current.maxPolarAngle = Math.PI / 2; // Limit vertical rotation
@@ -39,15 +50,15 @@ function Hero() {
 
 
   return (
-    <>
-      <motion.div className='bg-gradient-to-r from-black to-gray-900 lg:block hidden overflow-hidden m-0 h-screen relative text-white '
+    <div className='overflow-hidden'>
+      <motion.div className='bg-gradient-to-r from-black to-gray-900 sm:block hidden overflow-hidden m-0 h-screen relative text-white '
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, delay: 0.5 }}>
 
         <div className='w-full pt-24   gap-0 flex flex-col justify-center p-0 items-center  '>
           <h2 className='  text-[35px] p-0 m-0   '>CREATE WHAT YOU LIKE AT</h2>
-          <h1 className=' leading-10 m-0 lg:text-[180px] text-[100px] py-12 font-extrabold '>STICKER HIVE</h1>
+          <h1 className=' leading-10 m-0 text-[180px]  py-12 font-extrabold '>STICKER HIVE</h1>
         </div>
 
         <motion.div className='object-contain absolute z-0 bottom-0 w-full '
@@ -94,67 +105,59 @@ function Hero() {
 
 
       {/* Mobile view */}
-      <div className='sm:hidden flex flex-col min-h-screen w-screen bg-gradient-to-t from-black to-gray-900 text-white overflow-hidden'>
+      <motion.div className='bg-gradient-to-t from-black to-gray-900 sm:hidden flex flex-col gap-10 justify-center items-center  overflow-hidden m-0  bg-contain h-screen  text-white py-28 px-5 '
+      initial={{y:75,opacity:0}}
+      animate={{y:0,opacity:1}}
+      transition={{type:'tween',duration:0.5}}>
 
-        <motion.div className=''
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}>
+     <div className='w-full'>
+     <Carousel className=''>
+        <CarouselContent>
+          <CarouselItem><img src="/rgbKeyboard.png" alt="" className='w-full' /></CarouselItem>
+          <CarouselItem><img src="/rgbKeyboard.png" alt="" className='w-full' /></CarouselItem>
+          <CarouselItem><img src="/rgbKeyboard.png" alt="" className='w-full' /></CarouselItem>
+        </CarouselContent>
+      
+      </Carousel>
+     </div>
+    
 
+     
+   
 
-          <div className='relative'>
-
-          <div className='z-10 absolute top-[10vh] text-6xl font-extrabold m-2 p-1'>STICKER HIVE</div>
-
-
-          <motion.div className='z-0 absolute top-[50vh]'
-            initial={{ y: "10vw", opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ type: "tween", delay: 1 }}>
-            <img src="/assets/cropped-mountain-2.png " className='scale-x-[5] scale-y-[4] ' alt="" />
-          </motion.div>
-          </div>
-
-
-
-          <div className='absolute top-[60vh] flex w-screen justify-center items-center'
-          >
-           <div>
-           <h1 className='p-2 font-bold text-[20px] max-w-[95vw]  text-[#7F00FF] z-10'>STICKER TEMPLATE
-              GENERATOR</h1>
-            <p className='p-2 text-[14px] z-10 text-white max-w-[90vw]'>
+      {/* <h1 className=' leading-tight m-0 text-7xl   font-extrabold px-5'>Sticker Hive</h1> */}
+      <div className=' z-10  order-2  '>
+      <h1 className='font-bold   text-[27px] text-[#7F00FF]'>STICKER TEMPLATE GENERATOR</h1>
+            <p className='text-md my-2 text-gray-400'>
               Create your own stickers by selecting
               your character from our wide range of
               character combinations.
+              Sticker Hive simplifies creating sticker templates by eliminating the need for complex editing software.
             </p>
-            <div className=''>
+            <Link href={"/create"} className="text-red mt-5 flex justify-center items-center hover:before:bg-redborder-[#7F00FF] relative h-[40px] rounded-lg w-36 overflow-hidden border border-[#7F00FF] bg-white px-3 text-[#7F00FF] shadow-2xl transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-[#7F00FF] before:transition-all before:duration-500 hover:text-white hover:shadow-[#7F00FF] hover:before:left-0 hover:before:w-full"><span className="relative z-10">Create Now</span></Link>
+        </div>
+      
+    {/* <div className='  w-full absolute bottom-0 z-0 scale-y-95 object-cover'>
+         <img src="/assets/mobile-mountain.png " className=' w-full h-full  ' alt="" />
+         </div>
+    */}
 
-              <Link href={"/create"} className="text-red p-1 m-1  flex justify-center items-center hover:before:bg-redborder-[#7F00FF] relative h-[45px] rounded-lg w-36 overflow-hidden border border-[#7F00FF] bg-white px-3 text-[#7F00FF] shadow-2xl transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-[#7F00FF] before:transition-all before:duration-500 hover:text-white hover:shadow-[#7F00FF] hover:before:left-0 hover:before:w-full"><span className=" z-10">Create Now</span></Link>
-           </div>
-            </div>
-          </div>
+     
+           
+
+   
+     
+      
+   
+     
 
 
-          <motion.div className='absolute flex justify-center items-center top-[25vh] h-[300px] '
-            initial={{ x: "50vw" }}
-            animate={{ x: 0 }}
-            transition={{ type: "spring", delay: 0.5, stiffness: 80 }}>
-
-
-            <Canvas className='m-2'>
-              <Environment preset='studio' />
-              <CustomOrbitControls />
-              <ThreeScene />
-            </Canvas>
-
-          </motion.div>
-        </motion.div>
-      </div>
+      </motion.div>
 
 
 
 
-    </>
+    </div>
   )
 }
 

@@ -23,12 +23,12 @@ function Benefits() {
     
        
   return (
-    <div  className=' w-full flex bg-gradient-to-b from-black text-white text-white to-gray-900 py-10 lg:px-16 px-2 justify-center items-center gap-20 '>
+    <div  className=' w-full flex bg-gradient-to-b from-black text-white to-gray-900 py-10 lg:px-16 px-2 justify-center items-center gap-20 '>
 
 
                 <motion.div whileHover={{scale:1.1}} className='lg:block hidden w-[50%]'><Image  src='/rgbKeyboard.png' width={300} height={300} alt="rgbKeyboard" className='w-full' /></motion.div>
 
-                <motion.div ref={ref} className='flex gap-4 justify-center items-center w-full px-10'
+                <motion.div ref={ref} className='flex gap-4 justify-center items-center w-full px-7'
                 variants={
                     {
                         hidden: {opacity: 0, y: 75},

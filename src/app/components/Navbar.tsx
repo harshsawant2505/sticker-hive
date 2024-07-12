@@ -42,7 +42,7 @@ const menuButtonStyle = {
           
         </nav>
 
-        <nav className='w-full flex fixed text-white  h-14 py-8 lg:hidden justify-between items-center px-8 bg-custom-gradient  border-b-[1px]   border-[#1F2937] ' >
+        <nav className='w-full flex fixed text-white  h-14 py-8 lg:hidden z-20  bg-gray-900  justify-between items-center px-8 bg-custom-gradient  border-b-[1px]   border-[#1F2937] ' >
         <Link className='h-full w-fit flex items-center mt-1' href={'/'}><img className='w-48 ' src='/assets/stickerHive.png'/></Link>
               <AnimatePresence>
               {menu &&

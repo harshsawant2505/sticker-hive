@@ -16,6 +16,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Divide } from 'lucide-react'
+import Export from '../components/Export'
+import ImageDownloader from '../components/ImageDownloader'
 
 
 
@@ -23,8 +25,15 @@ function Page() {
 
   const [src, setsrc] = useState([])
   const [character, setcharacter] = useState('')
-  const [SelectedKey,setSelectedKey] = useState('')
+  const [SelectedKey,setSelectedKey] = useState(0)
   const [imageSource,setimageSource] = useState('')
+  const [imgEach1,setimgEach1] = useState([''])
+  const [convertedimgEach1,setconvertedimgEach1] = useState([''])
+  const [convertedimgEach2,setconvertedimgEach2] = useState([''])
+  const [convertedimgEach3,setconvertedimgEach3] = useState([''])
+  const [imgEach2,setimgEach2] = useState([''])
+  const [imgEach3,setimgEach3] = useState([''])
+  const [selectedRow, setselectedRow] = useState(1)
 
   const getCharacter = async (character: string) => {
     try {
@@ -43,24 +52,77 @@ function Page() {
   }, [])
 
 
+  const handleimageSet = (imgSrc:string)=>{
+
+    if(selectedRow == 1){
+      setimageSource(imgSrc);
+      const newArray = [...imgEach1]; 
+      newArray[SelectedKey] = imgSrc;
+      setimgEach1(newArray);
+    }else if(selectedRow == 2){
+      setimageSource(imgSrc);
+      const newArray = [...imgEach2]; 
+      newArray[SelectedKey] = imgSrc;
+      setimgEach2(newArray);
+    }else if(selectedRow == 3){
+      setimageSource(imgSrc);
+      const newArray = [...imgEach3]; 
+      newArray[SelectedKey] = imgSrc;
+      setimgEach3(newArray);
+
+    }
+
+    
+
+  }
+
   
 
-  const keysRow1 = [{ src: "src", key: 'Q' }, { src: "src", key: 'W' }, { src: "src", key: 'E' }, { src: "src", key: 'R' }, { src: "src", key: 'T' }, { src: "src", key: 'Y' }, { src: "src", key: 'U' }, { src: "src", key: 'I' }, { src: "src", key: 'O' }, { src: "src", key: 'P' }];
+ const keysRow1OnlyKeys = [ 'Q' ,  'W' ,  'E' ,  'R' ,  'T', 'Y' , 'U' , 'I' , 'O' , 'P' ];
+  const keysRow1:[string] = [""];
   const keysRow2 = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'];
   const keysRow3 = ['Z', 'X', 'C', 'V', 'B', 'N', 'M'];
 
 
 
 
+useEffect(() => {
+  console.log(imgEach1)
+}, [imgEach1])
+
+const [loaded,setloaded] = useState(false)
+const [loading,setloading] = useState(false)
+
+const handleClick = async () => {
+  setloading(true)
+  try {
+    const response = await axios.post("/api/convert-image",{data1:imgEach1,data2:imgEach2,data3:imgEach3});
+    setconvertedimgEach1(response.data.data1)
+    setconvertedimgEach2(response.data.data2)
+    setconvertedimgEach3(response.data.data3)
+    console.log(response.data.data1)
+    if(response.data.data1){
+     setloaded(true)
+      setloading(false)
+    }
+   
+    console.log(response);
+   
+  } catch (error) {
+    console.error('Error converting image:', error);
+  }
+
+}
+
 
   return (
 
 
 
-    <div className='text-white'>
+    <div className='text-white z-10 overflow-x-hidden  '>
       <Navbar />
 
-      <div className='p-10 bg-gradient-to-r from-black to-gray-900 text-white'>
+      <div className='p-10 bg-gradient-to-r from-black to-gray-900 text-white overflow-x-hidden'>
 
         <div className='h-screen w-full border-gray-700 border-[1px] rounded-lg  '>
 
@@ -71,7 +133,7 @@ function Page() {
             <h2 className='font-bold text-white text-xl'>Customization Panel</h2>
             <div className='flex gap-5'>
 
-              <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Export</button>
+              <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400' onClick={handleClick}>{!loading?"Export":"Exporting.."}</button>
               <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Save</button>
               <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Share</button>
               <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400 '>. . .</button>
@@ -90,34 +152,42 @@ function Page() {
 
               <div className="flex flex-col items-center w-fit rounded-lg border-[4px] justify-center p-4 space-y-2">
                 <div className="flex space-x-2">
-                  {keysRow1.map((key: any, index: any) => (
-                    <div
-                      key={index}
+
+                  {
+                    keysRow1OnlyKeys.map((key:any,index) =>{return(
+                      <div
+                      
                       className="w-10 h-10 flex items-center object-cover justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
-                      onClick={()=>{setSelectedKey(key.key);keysRow1[index].src = imageSource;}}
-                    >
-                      {SelectedKey == key.key?  <img src={imageSource} alt="" className=' w-full h-full' />: null}
+                      onClick={()=>{setSelectedKey(index);setselectedRow(1)}} >
+                      <img src={imgEach1[index] } className=' w-full h-full' />
                    
+                    </div> 
+                    )
+
+                    })
+                  }
+                    
+                  
+                </div>
+                <div className="flex space-x-2">
+                  {keysRow2.map((key:any,index:any )=> (
+                    <div
+                      key={key}
+                      className="w-10 h-10 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                      onClick={()=>{setSelectedKey(index);setselectedRow(2)}} 
+                    >
+                     <img src={imgEach2[index] } alt="" className=' w-full h-full' />
                     </div>
                   ))}
                 </div>
                 <div className="flex space-x-2">
-                  {keysRow2.map(key => (
+                  {keysRow3.map((key:any,index:any) => (
                     <div
                       key={key}
                       className="w-10 h-10 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                      onClick={()=>{setSelectedKey(index);setselectedRow(3)}} 
                     >
-                      {key}
-                    </div>
-                  ))}
-                </div>
-                <div className="flex space-x-2">
-                  {keysRow3.map(key => (
-                    <div
-                      key={key}
-                      className="w-10 h-10 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
-                    >
-                      {key}
+                       <img src={imgEach3[index] } alt="" className=' w-full h-full' />
                     </div>
                   ))}
                 </div>
@@ -135,7 +205,7 @@ function Page() {
 
             <div className='h-full border border-gray-700 rounded-sm w-[36%] p-5 flex flex-col gap-5'>
               <h2>Choose your image</h2>
-              <div className='flex gap-5'>
+              <div className='flex gap-5 text-white'>
                 <Select>
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Select genre" />
@@ -148,7 +218,7 @@ function Page() {
                 </Select>
 
 
-                <Input id="picture" placeholder='custom' type="file" />
+                <Input id="picture" placeholder='custom' className='text-white' type="file" />
 
               </div>
 
@@ -158,11 +228,11 @@ function Page() {
                 <button onClick={() => { getCharacter(character) }} className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Search</button>
               </div>
 
-              <div className='overflow-y-auto overflow-x-hidden h-full flex flex-wrap gap-5  w-full'>
+              <div className='overflow-y-auto overflow-x-hidden h-full flex flex-wrap gap-5 pb-10  w-full'>
                 {src.map((src: any, index: any) => {
 
                   if (src.attributes.image) {
-                    return <img onClick={()=>{setimageSource(src.attributes.image.original)}} key={index} src={src.attributes.image.original} alt="" className='w-20' />
+                    return <img onClick={()=>{handleimageSet(src.attributes.image.original)}} src={src.attributes.image.original} alt="" className='w-20' />
                   } else {
                     return null
                   }
@@ -173,18 +243,27 @@ function Page() {
 
 
             </div>
-            <div className='h-full border border-gray-700 rounded-sm w-[20%] '></div>
+            <div className='h-full border border-gray-700 rounded-sm w-[20%] '>
+          
+         
+            </div>
 
-            <div></div>
+            <div>
+           
+             
+            </div>
           </div>
 
 
 
 
         </div>
-
+        <Export row1={convertedimgEach1} row2={convertedimgEach2} row3={convertedimgEach3} loaded = {loaded}  />
       </div>
+     
+     
 
+      {/* <button className='px-2 py-1 bg-black text-white' onClick={handleClick}>Click me</button> */}
 
       <NewFooter />
     </div>

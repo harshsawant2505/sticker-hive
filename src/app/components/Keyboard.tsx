@@ -1,46 +1,48 @@
 import React from 'react';
+import ImageComponent from './ImageDownloader';
+import { url } from 'inspector';
 
-const Keyboard = ({Row1}:any) => {
-  const keysRow1 = [{src:"src",key:'Q'}, {src:"src",key:'W'}, {src:"src",key:'E'}, {src:"src",key:'R'}, {src:"src",key:'T'}, {src:"src",key:'Y'}, {src:"src",key:'U'}, {src:"src",key:'I'}, {src:"src",key:'O'}, {src:"src",key:'P'}];
+const Keyboard = ({row1,row2,row3}:any) => {
+  const keysRow1 = [ 'Q' ,  'W' ,  'E' ,  'R' ,  'T', 'Y' , 'U' , 'I' , 'O' , 'P' ];
   const keysRow2 = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'];
   const keysRow3 = ['Z', 'X', 'C', 'V', 'B', 'N', 'M'];
 
 
   return (
-    <div className="flex flex-col items-center w-fit rounded-lg border-[4px] justify-center p-4 space-y-2">
+    <div className="flex flex-col items-center h-fit overflow-x-hidden rounded-lg justify-center  gap-y-2 ">
     <div className="flex space-x-2">
-      {keysRow1.map((key:any,index:any) => (
+      {row1&&row1.map((key:any,index:any) => (
         <div
           key={index}
-          className="w-10 h-10 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+          className="min-w-[10mm] object-contain  min-h-[10mm] max-w-[10mm] max-h-[10mm] border border-black flex items-center justify-center  text-gray-800 font-bold rounded "
         >
-          {key.key}
+        <img src={key} className='w-full h-full rounded' alt="" />
         </div>
       ))}
     </div>
-    <div className="flex space-x-2">
-      {keysRow2.map(key => (
+    <div className="flex space-x-1 z-0">
+      {row2&&row2.map((key:any,index:any) => (
         <div
-          key={key}
-          className="w-10 h-10 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+          key={index}
+          className="min-w-[10mm] min-h-[10mm] object-contain max-w-[10mm] max-h-[10mm] flex items-center justify-center  text-gray-800 font-bold rounded border border-black"
         >
-          {key}
+       <img src={key} className='w-full h-full rounded z-0' alt="" />
         </div>
       ))}
     </div>
-    <div className="flex space-x-2">
-      {keysRow3.map(key => (
+    <div className="flex space-x-1">
+      {row3&&row3.map((key:any,index:any) => (
         <div
-          key={key}
-          className="w-10 h-10 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+          key={index}
+          className="min-w-[10mm] min-h-[10mm] object-contain max-w-[10mm] max-h-[10mm] flex items-center justify-center  text-gray-800 font-bold rounded border border-black"
         >
-          {key}
+          <img src={key} alt="" className='w-full h-full rounded' />
         </div>
       ))}
     </div>
-    <div className="flex space-x-2">
+    <div className="flex space-x-1">
       <div
-        className="w-40 h-10 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+        className="min-w-48 min-h-[10mm] flex items-center justify-center  text-gray-800 font-bold rounded border border-black"
       >
         Space
       </div>
