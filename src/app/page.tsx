@@ -7,6 +7,7 @@ import Benefits from "./components/Benefits";
 import NewFooter from "./components/NewFooter";
 import {motion} from "framer-motion"
 import { useInView ,useAnimation} from "framer-motion";
+import { Slider } from "@/components/ui/slider";
 
 export default function Home() {
 
@@ -16,6 +17,7 @@ export default function Home() {
     
       >
         <Navbar/> 
+         
         <Hero />
         <Benefits /> 
         <NewFooter />
