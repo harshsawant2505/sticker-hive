@@ -16,9 +16,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Divide, Download } from 'lucide-react'
+
 import Export from '../components/Export'
-import ImageDownloader from '../components/ImageDownloader'
+
 
 
 

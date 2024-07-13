@@ -9,7 +9,7 @@ import Keyboard from './Keyboard';
 
 
 
-const Export: React.FC = ({row1,row2,row3,loaded}:any) => {
+const Export = ({row1,row2,row3,loaded}:any) => {
   const divRef = useRef<HTMLDivElement>(null);
 
  useEffect(() => {
