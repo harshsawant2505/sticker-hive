@@ -5,7 +5,11 @@ import NewFooter from '../components/NewFooter'
 import Navbar from '../components/Navbar'
 import Keyboard from '../components/Keyboard'
 import axios from 'axios'
-import toast, { Toaster } from 'react-hot-toast';
+// import toast, { Toaster } from 'react-hot-toast';
+import { RocketIcon } from "@radix-ui/react-icons"
+import { Toaster } from "@/components/ui/toaster"
+import { useToast } from "@/components/ui/use-toast"
+
 
 import { Input } from "@/components/ui/input"
 
@@ -17,12 +21,23 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+
+
+
 import Export from '../components/Export'
 
 
 
 
 function Page() {
+
+  const {toast} = useToast()
 
   const [src, setsrc] = useState([])
   const [character, setcharacter] = useState('')
@@ -115,6 +130,15 @@ useEffect(() => {
   console.log(imgEach1)
 }, [imgEach1])
 
+useEffect(() => {
+  if(imgEach1.length == 10 && imgEach2.length == 9 && imgEach3.length == 7){
+      toast({
+        title: "Heads Up! You made your design!",
+        description: "You can now Export it by clicking on the Export button"
+      })
+  }
+}, [imgEach1,imgEach2,imgEach3])
+
 const [loaded,setloaded] = useState(false)
 const [loading,setloading] = useState(false)
 
@@ -129,7 +153,10 @@ const handleClick = async () => {
     if(response.data.data1){
      setloaded(true)
       setloading(false)
-      toast.success("Download will start anytime now")
+      toast({
+        title: "Downloading...",
+        description: "Download will start anytime now",
+      })
     }
    
     console.log(response);
@@ -146,6 +173,7 @@ const handleClick = async () => {
 
 
     <div className='text-white z-10 overflow-x-hidden  '>
+     
     
       <Navbar />
       <Toaster /> 
@@ -161,8 +189,17 @@ const handleClick = async () => {
             <div className='flex gap-5'>
 
               <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400' onClick={handleClick}>{!loading?"Export":"Exporting.."}</button>
-              <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Save</button>
-              <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Share</button>
+              {/* <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Save</button> */}
+              {/* <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Share</button> */}
+              <Popover>
+                <PopoverTrigger className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Save</PopoverTrigger>
+                <PopoverContent>Coming soon.</PopoverContent>
+            </Popover>
+              <Popover>
+                <PopoverTrigger className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Share</PopoverTrigger>
+                <PopoverContent>Coming soon.</PopoverContent>
+            </Popover>
+
               <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400 '>. . .</button>
 
 
@@ -182,13 +219,13 @@ const handleClick = async () => {
 
                   {
                     keysRow1OnlyKeys.map((key:any,index) =>{return(
-                      <div
+                      <button
                       key={index}
-                      className="w-10 h-10 flex items-center object-cover justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                      className="w-10 h-10 flex focus:border-4 focus:border-white  items-center object-cover border justify-center bg-gray-400 text-gray-800 font-bold rounded shadow-md"
                       onClick={()=>{setSelectedKey(index);setselectedRow(1)}} >
                       <img src={imgEach1[index] } className=' w-full h-full' />
                    
-                    </div> 
+                    </button> 
                     )
 
                     })
@@ -198,24 +235,24 @@ const handleClick = async () => {
                 </div>
                 <div className="flex space-x-2">
                   {keysRow2.map((key:any,index:any )=> (
-                    <div
+                    <button
                       key={key}
-                      className="w-10 h-10 flex shrink items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                      className="w-10 h-10 flex shrink focus:border-4 focus:border-white border items-center justify-center bg-gray-400 text-gray-800 font-bold rounded shadow-md"
                       onClick={()=>{setSelectedKey(index);setselectedRow(2)}} 
                     >
                      <img src={imgEach2[index] } alt="" className=' w-full h-full' />
-                    </div>
+                    </button>
                   ))}
                 </div>
                 <div className="flex space-x-2">
                   {keysRow3.map((key:any,index:any) => (
-                    <div
+                    <button
                       key={key}
-                      className="w-10 h-10 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                      className="w-10 h-10 flex items-center focus:border-4 focus:border-white border justify-center bg-gray-400 text-gray-800 font-bold rounded shadow-md"
                       onClick={()=>{setSelectedKey(index);setselectedRow(3)}} 
                     >
                        <img src={imgEach3[index] } alt="" className=' w-full h-full' />
-                    </div>
+                    </button>
                   ))}
                 </div>
                 <div className=" space-x-2 hidden">
@@ -270,8 +307,9 @@ const handleClick = async () => {
 
 
             </div>
-            <div className='h-full border border-gray-700 rounded-sm w-[20%] px-4 flex flex-col gap-7 item-center  py-3'>
+            <div className='h-full border border-gray-700 rounded-sm w-[20%] px-4 flex flex-col gap-6 item-center  py-3'>
               <h2>Add your custom Images</h2>
+              <p className='text-gray-400'>Click on the picture below to add on keyboard</p>
               <div className='w-[80%]'>
               <Input id="picture" placeholder='custom' className='text-white' type="file" onChange={handleImageChange}  />
               </div>
@@ -306,13 +344,13 @@ const handleClick = async () => {
 
                   {
                     keysRow1OnlyKeys.map((key:any,index) =>{return(
-                      <div
+                      <button
                       key={index}
-                      className="w-7 h-7 flex items-center object-cover justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                      className="w-7 h-7 flex focus:border-4 focus:border-white border items-center object-cover justify-center bg-gray-400 text-gray-800 font-bold rounded shadow-md"
                       onClick={()=>{setSelectedKey(index);setselectedRow(1)}} >
                       <img src={imgEach1[index] } className=' w-full h-full' />
                    
-                    </div> 
+                    </button> 
                     )
 
                     })
@@ -322,24 +360,24 @@ const handleClick = async () => {
                 </div>
                 <div className="flex space-x-1">
                   {keysRow2.map((key:any,index:any )=> (
-                    <div
+                    <button
                       key={key}
-                      className="w-7 h-7 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                      className="w-7 h-7 flex focus:border-4 focus:border-white border items-center justify-center bg-gray-400 text-gray-800 font-bold rounded shadow-md"
                       onClick={()=>{setSelectedKey(index);setselectedRow(2)}} 
                     >
                      <img src={imgEach2[index] } alt="" className=' w-full h-full' />
-                    </div>
+                    </button>
                   ))}
                 </div>
                 <div className="flex space-x-1">
                   {keysRow3.map((key:any,index:any) => (
-                    <div
+                    <button
                       key={key}
-                      className="w-7 h-7 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                      className="w-7 h-7 flex focus:border-4 focus:border-white border items-center justify-center bg-gray-400 text-gray-800 font-bold rounded shadow-md"
                       onClick={()=>{setSelectedKey(index);setselectedRow(3)}} 
                     >
                        <img src={imgEach3[index] } alt="" className=' w-full h-full' />
-                    </div>
+                    </button>
                   ))}
                 </div>
                 <div className=" space-x-1 hidden">
@@ -400,6 +438,7 @@ const handleClick = async () => {
 
               <div className='h-full border  border-gray-700 rounded-sm w-full px-5 flex flex-col gap-7 item-center  py-5'>
               <h2 className='font-bold text-xl'>Add your custom Images</h2>
+              <p className='text-gray-400'>Click on the picture below to add on keyboard</p>
               <div className='w-[70%]'>
               <Input id="picture" placeholder='custom' className='text-white' type="file" onChange={handleImageChange}  />
               </div>
