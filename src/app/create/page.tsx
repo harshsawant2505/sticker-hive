@@ -156,7 +156,7 @@ const handleClick = async () => {
                   {
                     keysRow1OnlyKeys.map((key:any,index) =>{return(
                       <div
-                      
+                      key={index}
                       className="w-10 h-10 flex items-center object-cover justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
                       onClick={()=>{setSelectedKey(index);setselectedRow(1)}} >
                       <img src={imgEach1[index] } className=' w-full h-full' />
@@ -232,7 +232,7 @@ const handleClick = async () => {
                 {src.map((src: any, index: any) => {
 
                   if (src.attributes.image) {
-                    return <img onClick={()=>{handleimageSet(src.attributes.image.original)}} src={src.attributes.image.original} alt="" className='w-20' />
+                    return <img key={index} onClick={()=>{handleimageSet(src.attributes.image.original)}} src={src.attributes.image.original} alt="" className='w-[30%] h-[30%] ' />
                   } else {
                     return null
                   }
