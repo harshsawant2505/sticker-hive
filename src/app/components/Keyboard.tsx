@@ -40,7 +40,7 @@ const Keyboard = ({row1,row2,row3}:any) => {
         </div>
       ))}
     </div>
-    <div className="flex space-x-1">
+    <div className=" space-x-1 hidden">
       <div
         className="min-w-48 min-h-[10mm] flex items-center justify-center  text-gray-800 font-bold rounded border border-black"
       >

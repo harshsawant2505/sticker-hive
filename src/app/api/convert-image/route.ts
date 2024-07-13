@@ -4,11 +4,17 @@ import { NextRequest, NextResponse } from "next/server";
 async function fetchImages(data: string[]): Promise<string[]> {
   const fetchImagePromises = data.map(async (url: string) => {
     try {
-      const response = await axios.get(url, { responseType: 'arraybuffer' });
-      const imageBuffer = Buffer.from(response.data, 'binary');
-      const base64Image = imageBuffer.toString('base64');
-      const imageSrc = `data:${response.headers['content-type']};base64,${base64Image}`;
-      return imageSrc;
+      if(url.startsWith("data:")){
+        return url; 
+      }else{
+        const response = await axios.get(url, { responseType: 'arraybuffer' });
+        const imageBuffer = Buffer.from(response.data, 'binary');
+        const base64Image = imageBuffer.toString('base64');
+        const imageSrc = `data:${response.headers['content-type']};base64,${base64Image}`;
+        return imageSrc;
+
+      }
+     
     } catch (error) {
       // Handle individual image fetch errors here
       console.error(`Error fetching image from ${url}:`, error);

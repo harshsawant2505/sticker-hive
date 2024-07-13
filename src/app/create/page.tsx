@@ -5,6 +5,7 @@ import NewFooter from '../components/NewFooter'
 import Navbar from '../components/Navbar'
 import Keyboard from '../components/Keyboard'
 import axios from 'axios'
+import toast, { Toaster } from 'react-hot-toast';
 
 import { Input } from "@/components/ui/input"
 
@@ -15,7 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Divide } from 'lucide-react'
+import { Divide, Download } from 'lucide-react'
 import Export from '../components/Export'
 import ImageDownloader from '../components/ImageDownloader'
 
@@ -34,22 +35,46 @@ function Page() {
   const [imgEach2,setimgEach2] = useState([''])
   const [imgEach3,setimgEach3] = useState([''])
   const [selectedRow, setselectedRow] = useState(1)
+  const [image, setimage] = useState('')
 
   const getCharacter = async (character: string) => {
     try {
-
+      
       const response = await axios.get(`https://kitsu.io/api/edge/characters?filter[name]=${character}&Page[limit]=10&Page[offset]=0`)
-      console.log(response.data.data)
+      // const response = await axios.get(`https://kitsu.io/api/edge/anime?filter[text]=${character}`)
+      
       setsrc(response.data.data)
+   
+      // setanimeLink(response.data.data[1].relationships.animeCharacters.links.related)
+
+      // console.log(response.data.data[1].relationships.animeCharacters.links.related)
+  
 
     } catch (error: any) {
       console.log(error)
     }
   }
+  
 
   useEffect(() => {
     getCharacter("luffy")
   }, [])
+
+  
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const image = e.target.files?.[0];
+    if (image) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setimage(reader.result as string);
+      };
+      reader.readAsDataURL(image);
+    }
+  };
+useEffect(() => {
+ console.log(image);
+}, [image])
 
 
   const handleimageSet = (imgSrc:string)=>{
@@ -104,6 +129,7 @@ const handleClick = async () => {
     if(response.data.data1){
      setloaded(true)
       setloading(false)
+      toast.success("Download will start anytime now")
     }
    
     console.log(response);
@@ -120,8 +146,9 @@ const handleClick = async () => {
 
 
     <div className='text-white z-10 overflow-x-hidden  '>
+    
       <Navbar />
-
+      <Toaster /> 
       <div className='p-10 bg-gradient-to-r from-black to-gray-900 text-white overflow-x-hidden'>
 
         <div className='h-screen w-full border-gray-700 border-[1px] rounded-lg  '>
@@ -191,7 +218,7 @@ const handleClick = async () => {
                     </div>
                   ))}
                 </div>
-                <div className="flex space-x-2">
+                <div className=" space-x-2 hidden">
                   <div
                     className="w-40 h-10 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
                   >
@@ -218,7 +245,7 @@ const handleClick = async () => {
                 </Select>
 
 
-                <Input id="picture" placeholder='custom' className='text-white' type="file" />
+          
 
               </div>
 
@@ -243,7 +270,12 @@ const handleClick = async () => {
 
 
             </div>
-            <div className='h-full border border-gray-700 rounded-sm w-[20%] '>
+            <div className='h-full border border-gray-700 rounded-sm w-[20%] px-2 flex flex-col gap-7 item-center  py-3'>
+              <h2>Add your custom Images</h2>
+              <div className='w-[80%]'>
+              <Input id="picture" placeholder='custom' className='text-white' type="file" onChange={handleImageChange}  />
+              </div>
+              <img src={image} onClick={()=>{handleimageSet(image)}}  alt="" />
           
          
             </div>
