@@ -105,7 +105,7 @@ function Hero() {
 
 
       {/* Mobile view */}
-      <motion.div className='bg-gradient-to-t from-black to-gray-900 sm:hidden flex flex-col gap-10 justify-center items-center  overflow-hidden m-0  bg-contain h-screen  text-white py-28 px-5 '
+      <motion.div className='bg-gradient-to-t from-black to-gray-900 sm:hidden flex flex-col gap-10 justify-center items-center  overflow-hidden m-0  bg-contain h-screen  text-white py-28 px-6 '
       initial={{y:75,opacity:0}}
       animate={{y:0,opacity:1}}
       transition={{type:'tween',duration:0.5}}>

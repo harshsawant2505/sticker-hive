@@ -149,14 +149,14 @@ const handleClick = async () => {
     
       <Navbar />
       <Toaster /> 
-      <div className='p-10 bg-gradient-to-r from-black to-gray-900 text-white overflow-x-hidden'>
+      <div className='p-10 bg-gradient-to-r hidden sm:block from-black to-gray-900 text-white overflow-x-hidden'>
 
         <div className='h-screen w-full border-gray-700 border-[1px] rounded-lg  '>
 
 
 
 
-          <div className=' w-full border-gray-700 border-[1px] rounded-t-lg h-16 flex justify-between items-center px-10'>
+          <div className=' w-full border-gray-700 border-[1px] rounded-t-lg h-16 flex  justify-between items-center px-10'>
             <h2 className='font-bold text-white text-xl'>Customization Panel</h2>
             <div className='flex gap-5'>
 
@@ -171,11 +171,11 @@ const handleClick = async () => {
           </div>
 
 
-          <div className=' w-full full h-[90%]  flex gap-7 py-10 px-2 pl-4 justify-center'>
+          <div className=' w-full full h-[90%]  flex gap-7  py-10 px-2 pl-4 justify-center'>
+          
 
-
-            <div className='h-full git rounded-sm w-[40%] flex items-center justify-center '> {/* keyboard div*/}
-
+            <div  className='h-full git rounded-sm w-[40%] flex items-center justify-center '> {/* keyboard div*/}
+    
 
               <div className="flex flex-col items-center w-fit rounded-lg border-[4px] justify-center p-4 space-y-2">
                 <div className="flex space-x-2">
@@ -200,7 +200,7 @@ const handleClick = async () => {
                   {keysRow2.map((key:any,index:any )=> (
                     <div
                       key={key}
-                      className="w-10 h-10 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                      className="w-10 h-10 flex shrink items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
                       onClick={()=>{setSelectedKey(index);setselectedRow(2)}} 
                     >
                      <img src={imgEach2[index] } alt="" className=' w-full h-full' />
@@ -270,7 +270,7 @@ const handleClick = async () => {
 
 
             </div>
-            <div className='h-full border border-gray-700 rounded-sm w-[20%] px-2 flex flex-col gap-7 item-center  py-3'>
+            <div className='h-full border border-gray-700 rounded-sm w-[20%] px-4 flex flex-col gap-7 item-center  py-3'>
               <h2>Add your custom Images</h2>
               <div className='w-[80%]'>
               <Input id="picture" placeholder='custom' className='text-white' type="file" onChange={handleImageChange}  />
@@ -290,9 +290,126 @@ const handleClick = async () => {
 
 
         </div>
-        <Export row1={convertedimgEach1} row2={convertedimgEach2} row3={convertedimgEach3} loaded = {loaded}  />
+      
       </div>
-     
+      <Export row1={convertedimgEach1} row2={convertedimgEach2} row3={convertedimgEach3} loaded = {loaded}  />
+
+      {/*mobile view*/}
+
+
+                <div className='flex flex-col sm:hidden py-20 px-6 gap-10 text-white bg-black'>
+
+                  <h2 className='text-white font-bold text-xl'>Preview</h2>
+                  <div className='w-full  flex justify-center'>
+                  <div className="flex flex-col items-center w-fit   rounded-lg border-[4px] justify-center p-4 space-y-2">
+                <div className="flex space-x-2">
+
+                  {
+                    keysRow1OnlyKeys.map((key:any,index) =>{return(
+                      <div
+                      key={index}
+                      className="w-7 h-7 flex items-center object-cover justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                      onClick={()=>{setSelectedKey(index);setselectedRow(1)}} >
+                      <img src={imgEach1[index] } className=' w-full h-full' />
+                   
+                    </div> 
+                    )
+
+                    })
+                  }
+                    
+                  
+                </div>
+                <div className="flex space-x-2">
+                  {keysRow2.map((key:any,index:any )=> (
+                    <div
+                      key={key}
+                      className="w-7 h-7 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                      onClick={()=>{setSelectedKey(index);setselectedRow(2)}} 
+                    >
+                     <img src={imgEach2[index] } alt="" className=' w-full h-full' />
+                    </div>
+                  ))}
+                </div>
+                <div className="flex space-x-2">
+                  {keysRow3.map((key:any,index:any) => (
+                    <div
+                      key={key}
+                      className="w-7 h-7 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                      onClick={()=>{setSelectedKey(index);setselectedRow(3)}} 
+                    >
+                       <img src={imgEach3[index] } alt="" className=' w-full h-full' />
+                    </div>
+                  ))}
+                </div>
+                <div className=" space-x-2 hidden">
+                  <div
+                    className="w-32 h-7 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                  >
+                    Space
+                  </div>
+                </div>
+                   </div>
+                  </div>
+
+
+           
+                  <div className='flex flex-col gap-5'>
+
+                
+                
+                  <h2 className='text-white font-bold text-xl'>Choose your Image</h2>
+
+                  <div className='flex gap-5 text-white'>
+                <Select>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Select genre" />
+                  </SelectTrigger>
+                  <SelectContent className='text-white bg-black'>
+                    <SelectItem value="light">Anime</SelectItem>
+                    <SelectItem value="dark">Movies</SelectItem>
+                    <SelectItem value="system">Cartoon</SelectItem>
+                  </SelectContent>
+                </Select>
+
+
+                <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400' onClick={handleClick}>{!loading?"Export":"Exporting.."}</button>
+
+              </div>
+              </div>
+
+
+              <div className='w-[60%] flex gap-3'>
+                <Input onChange={(e: any) => { setcharacter(e.target.value) }} placeholder='Name of character' className='w-40' />
+                <button onClick={() => { getCharacter(character) }} className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Search</button>
+              </div>
+
+              <div className='overflow-y-auto  overflow-x-hidden max-h-[40vh] flex flex-wrap gap-5 pb-10 px-3  w-full'>
+                {src.map((src: any, index: any) => {
+
+                  if (src.attributes.image) {
+                    return <img key={index} onClick={()=>{handleimageSet(src.attributes.image.original)}} src={src.attributes.image.original} alt="" className='w-[20%]' />
+                  } else {
+                    return null
+                  }
+
+
+                })}
+              </div>
+
+
+              <div className='h-full border  border-gray-700 rounded-sm w-full px-5 flex flex-col gap-7 item-center  py-5'>
+              <h2 className='font-bold text-xl'>Add your custom Images</h2>
+              <div className='w-[70%]'>
+              <Input id="picture" placeholder='custom' className='text-white' type="file" onChange={handleImageChange}  />
+              </div>
+              <img src={image} onClick={()=>{handleimageSet(image)}}  alt="" className='w-[60%]' />
+          
+         
+            </div>
+
+                </div>
+                
      
 
       {/* <button className='px-2 py-1 bg-black text-white' onClick={handleClick}>Click me</button> */}

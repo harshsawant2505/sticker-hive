@@ -34,8 +34,8 @@ const menuButtonStyle = {
 
           <div className='flex gap-12 items-center'>
             <Link  className='hover:text-[#7F00FF]' href={"/"} >Home</Link>
-            <Link className='hover:text-[#7F00FF]' href={"/about"}>About</Link>
             <Link className='hover:text-[#7F00FF]' href={"/create"}>Create</Link>
+            <Link className='hover:text-[#7F00FF]' href={"/about"}>About</Link>
             <Link className='hover:text-[#7F00FF]' href={"/contact"}>Contact</Link>
             <FaUser className='text-4xl bg-gray-400 rounded-full px-2 ml-10 hover:cursor-pointer py-0' />
           </div>
@@ -69,6 +69,15 @@ const menuButtonStyle = {
                      transition={{type:"spring",duration:0.5}}
                      >Home <FaHome /></motion.a>
 
+                  <motion.a className='w-full h-16 border rounded-lg px-6 flex justify-between items-center   ' href={"/create"}
+                     variants={{
+                      start: {scale:0},
+                      end: {scale:1}
+                     }}
+                     initial={"start"}
+                     animate={"end"}
+                     transition={{type:"spring",duration:0.5,delay:0.1}}>Create <FaPencil /></motion.a>
+
                     <motion.a className='w-full h-16 border rounded-lg px-6 flex justify-between items-center   ' href={"/about"}
                      variants={{
                       start: {scale:0},
@@ -76,16 +85,9 @@ const menuButtonStyle = {
                      }}
                      initial={"start"}
                      animate={"end"}
-                     transition={{type:"spring",duration:0.5,delay:0.1}}>About <FaNoteSticky/></motion.a>
+                     transition={{type:"spring",duration:0.5,delay:0.2}}>About <FaNoteSticky/></motion.a>
 
-                    <motion.a className='w-full h-16 border rounded-lg px-6 flex justify-between items-center   ' href={"/create"}
-                     variants={{
-                      start: {scale:0},
-                      end: {scale:1}
-                     }}
-                     initial={"start"}
-                     animate={"end"}
-                     transition={{type:"spring",duration:0.5,delay:0.2}}>Create <FaPencil /></motion.a>
+                  
 
                     <motion.a className='w-full h-16 border rounded-lg px-6 flex justify-between items-center   ' href={"/contact"}
                      variants={{
