@@ -302,7 +302,7 @@ const handleClick = async () => {
                   <h2 className='text-white font-bold text-xl'>Preview</h2>
                   <div className='w-full  flex justify-center'>
                   <div className="flex flex-col items-center w-fit   rounded-lg border-[4px] justify-center p-4 space-y-2">
-                <div className="flex space-x-2">
+                <div className="flex space-x-1">
 
                   {
                     keysRow1OnlyKeys.map((key:any,index) =>{return(
@@ -320,7 +320,7 @@ const handleClick = async () => {
                     
                   
                 </div>
-                <div className="flex space-x-2">
+                <div className="flex space-x-1">
                   {keysRow2.map((key:any,index:any )=> (
                     <div
                       key={key}
@@ -331,7 +331,7 @@ const handleClick = async () => {
                     </div>
                   ))}
                 </div>
-                <div className="flex space-x-2">
+                <div className="flex space-x-1">
                   {keysRow3.map((key:any,index:any) => (
                     <div
                       key={key}
@@ -342,7 +342,7 @@ const handleClick = async () => {
                     </div>
                   ))}
                 </div>
-                <div className=" space-x-2 hidden">
+                <div className=" space-x-1 hidden">
                   <div
                     className="w-32 h-7 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
                   >
