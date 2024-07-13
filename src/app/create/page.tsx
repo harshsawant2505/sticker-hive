@@ -5,7 +5,11 @@ import NewFooter from '../components/NewFooter'
 import Navbar from '../components/Navbar'
 import Keyboard from '../components/Keyboard'
 import axios from 'axios'
-import toast, { Toaster } from 'react-hot-toast';
+// import toast, { Toaster } from 'react-hot-toast';
+import { RocketIcon } from "@radix-ui/react-icons"
+import { Toaster } from "@/components/ui/toaster"
+import { useToast } from "@/components/ui/use-toast"
+
 
 import { Input } from "@/components/ui/input"
 
@@ -17,6 +21,15 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+
+
+
 import Export from '../components/Export'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Slider } from '@/components/ui/slider'
@@ -26,6 +39,8 @@ import { opacity } from 'html2canvas/dist/types/css/property-descriptors/opacity
 
 
 function Page() {
+
+  const { toast } = useToast()
 
   const [src, setsrc] = useState([])
   const [character, setcharacter] = useState('')
@@ -120,6 +135,15 @@ function Page() {
     console.log(imgEach1)
   }, [imgEach1])
 
+  useEffect(() => {
+    if (imgEach1.length == 10 && imgEach2.length == 9 && imgEach3.length == 7) {
+      toast({
+        title: "Heads Up! You made your design!",
+        description: "You can now Export it by clicking on the Export button"
+      })
+    }
+  }, [imgEach1, imgEach2, imgEach3])
+
   const [loaded, setloaded] = useState(false)
   const [loading, setloading] = useState(false)
 
@@ -134,71 +158,232 @@ function Page() {
       if (response.data.data1) {
         setloaded(true)
         setloading(false)
-        toast.success("Download will start anytime now")
+        toast({
+          title: "Downloading...",
+          description: "Download will start anytime now",
+        })
       }
 
-      console.log(response);
-
-    } catch (error) {
-      console.error('Error converting image:', error);
     }
-
-  }
+    catch(error){
+      
+    }
 
 
   return (
+      <>
+
+
+        <div className='text-white z-10 overflow-x-hidden  '>
+
+
+          <Navbar />
+          <Toaster />
+          <div className='p-10 bg-gradient-to-r hidden sm:block from-black to-gray-900 text-white overflow-x-hidden'>
+
+            <div className='h-screen w-full border-gray-700 border-[1px] rounded-lg  '>
 
 
 
-    <div className='text-white z-10 overflow-x-hidden  '>
 
-      <Navbar />
-      <Toaster />
-      <div className='p-10 bg-gradient-to-r hidden sm:block from-black to-gray-900 text-white overflow-x-hidden'>
+              <div className=' w-full border-gray-700 border-[1px] rounded-t-lg h-16 flex  justify-between items-center px-10'>
+                <h2 className='font-bold text-white text-xl'>Customization Panel</h2>
+                <div className='flex gap-5'>
 
-        <div className='h-screen w-full border-gray-700 border-[1px] rounded-lg  '>
+                  <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400' onClick={handleClick}>{!loading ? "Export" : "Exporting.."}</button>
+                  {/* <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Save</button> */}
+                  {/* <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Share</button> */}
+                  <Popover>
+                    <PopoverTrigger className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Save</PopoverTrigger>
+                    <PopoverContent>Coming soon.</PopoverContent>
+                  </Popover>
+                  <Popover>
+                    <PopoverTrigger className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Share</PopoverTrigger>
+                    <PopoverContent>Coming soon.</PopoverContent>
+                  </Popover>
+
+                  <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400 '>. . .</button>
 
 
+                </div>
+
+              </div>
 
 
-          <div className=' w-full border-gray-700 border-[1px] rounded-t-lg h-16 flex  justify-between items-center px-10'>
-            <h2 className='font-bold text-white text-xl'>Customization Panel</h2>
-            <div className='flex gap-5'>
+              <div className=' w-full full h-[90%]  flex gap-7  py-10 px-2 pl-4 justify-center'>
 
-              <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400' onClick={handleClick}>{!loading ? "Export" : "Exporting.."}</button>
-              <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Save</button>
-              <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Share</button>
-              <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400 '>. . .</button>
+
+                <div className='h-full git rounded-sm w-[40%] flex items-center justify-center '> {/* keyboard div*/}
+
+
+                  <div className="flex flex-col items-center w-fit rounded-lg border-[4px] justify-center p-4 space-y-2">
+                    <div className="flex space-x-2">
+
+                      {
+                        keysRow1OnlyKeys.map((character: any, index) => {
+                          return (
+                            <div
+                              key={index}
+                              className="w-10 h-10 flex items-center object-cover justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md "
+                              onClick={() => { setSelectedKey(index); setselectedRow(1) }} >
+                              <div className={`${showKeys ? "" : "hidden"} text-lg absolute flex justify-center items-center `}
+                                style={
+                                  { opacity: transparency / 100 }
+                                }>{character} </div>
+                              <img src={imgEach1[index]} className=' w-full h-full' />
+
+                            </div>
+                          )
+
+                        })
+                      }
+
+
+                    </div>
+                    <div className="flex space-x-2">
+                      {keysRow2.map((character, index: any) => (
+                        <div
+                          key={index}
+                          className="w-10 h-10 flex shrink items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                          onClick={() => { setSelectedKey(index); setselectedRow(2) }}
+                        >
+                          <div className={`${showKeys ? "" : "hidden"} text-lg absolute flex justify-center items-center `}
+                            style={
+                              { opacity: transparency / 100 }
+                            }>{character} </div>
+                          <img src={imgEach2[index]} alt="" className=' w-full h-full' />
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex space-x-2">
+                      {keysRow3.map((character: any, index: any) => (
+                        <div
+                          key={index}
+                          className="w-10 h-10 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                          onClick={() => { setSelectedKey(index); setselectedRow(3) }}
+                        >
+                          <div className={`${showKeys ? "" : "hidden"} text-lg  absolute flex justify-center items-center `}
+                            style={
+                              { opacity: transparency / 100 }
+                            }>{character} </div>
+                          <img src={imgEach3[index]} alt="" className=' w-full h-full' />
+                        </div>
+                      ))}
+                    </div>
+                    <div className=" space-x-2 hidden">
+                      <div
+                        className="w-40 h-10 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                      >
+                        Space
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+
+                <div className='h-full border border-gray-700 rounded-sm w-[36%] p-5 flex flex-col gap-5'>
+                  <h2>Choose your image</h2>
+                  <div className='flex gap-5 w-full text-white'>
+                    <Select>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Select genre" />
+                      </SelectTrigger>
+                      <SelectContent className='text-white bg-black'>
+                        <SelectItem value="light">Anime</SelectItem>
+                        <SelectItem value="dark">Movies</SelectItem>
+                        <SelectItem value="system">Cartoon</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <div className='flex justify-center items-center gap-5'>
+                      <div>
+                        <p>Show keys</p>
+                        <Checkbox className='bg-white text-white' onClick={() => setShowKeys(!showKeys)} />
+                      </div>
+                      <div className='w-[10vw]'>
+                        <p>Opacity</p>
+                        <Slider
+                          min={0}
+                          max={100}
+                          step={1}
+                          value={[transparency]}
+                          defaultValue={[0]}
+                          disabled={!showKeys}
+                          onValueChange={(value) => (setTransparency(value[0]))}
+                          className='w-full  rounded'
+                        />
+                      </div>
+                    </div>
+
+                  </div>
+
+
+                  <div className='w-[60%] flex gap-3'>
+                    <Input onChange={(e: any) => { setcharacter(e.target.value) }} placeholder='Name of character' />
+                    <button onClick={() => { getCharacter(character) }} className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Search</button>
+
+                  </div>
+
+                  <div className='overflow-y-auto overflow-x-hidden h-full flex flex-wrap gap-5 pb-10  w-full'>
+                    {src.map((src: any, index: any) => {
+
+                      if (src.attributes.image) {
+                        return <img key={index} onClick={() => { handleimageSet(src.attributes.image.original) }} src={src.attributes.image.original} alt="" className='w-[30%] h-[30%] ' />
+                      } else {
+                        return null
+                      }
+
+
+                    })}
+                  </div>
+
+
+                </div>
+                <div className='h-full border border-gray-700 rounded-sm w-[20%] px-4 flex flex-col gap-6 item-center  py-3'>
+                  <h2>Add your custom Images</h2>
+                  <p className='text-gray-400'>Click on the picture below to add on keyboard</p>
+                  <div className='w-[80%]'>
+                    <Input id="picture" placeholder='custom' className='text-white' type="file" onChange={handleImageChange} />
+                  </div>
+                  <img src={image} onClick={() => { handleimageSet(image) }} alt="" />
+
+
+                </div>
+
+                <div>
+
+
+                </div>
+              </div>
+
+
 
 
             </div>
 
           </div>
+          <Export row1={convertedimgEach1} row2={convertedimgEach2} row3={convertedimgEach3} loaded={loaded} />
+
+          {/*mobile view*/}
 
 
-          <div className=' w-full full h-[90%]  flex gap-7  py-10 px-2 pl-4 justify-center'>
+          <div className='flex flex-col sm:hidden py-20 px-6 gap-10 text-white bg-black'>
 
-
-            <div className='h-full git rounded-sm w-[40%] flex items-center justify-center '> {/* keyboard div*/}
-
-
-              <div className="flex flex-col items-center w-fit rounded-lg border-[4px] justify-center p-4 space-y-2">
-                <div className="flex space-x-2">
+            <h2 className='text-white font-bold text-xl'>Preview</h2>
+            <div className='w-full  flex justify-center'>
+              <div className="flex flex-col items-center w-fit   rounded-lg border-[4px] justify-center p-4 space-y-2">
+                <div className="flex space-x-1">
 
                   {
-                    keysRow1OnlyKeys.map((character: any, index) => {
+                    keysRow1OnlyKeys.map((key: any, index) => {
                       return (
-                        <div
+                        <button
                           key={index}
-                          className="w-10 h-10 flex items-center object-cover justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md "
+                          className="w-7 h-7 flex focus:border-4 focus:border-white border items-center object-cover justify-center bg-gray-400 text-gray-800 font-bold rounded shadow-md"
                           onClick={() => { setSelectedKey(index); setselectedRow(1) }} >
-                          <div className={`${showKeys ? "" : "hidden"} text-lg absolute flex justify-center items-center `}
-                            style={
-                              { opacity: transparency / 100 }
-                            }>{character} </div>
                           <img src={imgEach1[index]} className=' w-full h-full' />
 
-                        </div>
+                        </button>
                       )
 
                     })
@@ -206,51 +391,47 @@ function Page() {
 
 
                 </div>
-                <div className="flex space-x-2">
-                  {keysRow2.map((character, index: any) => (
-                    <div
-                      key={index}
-                      className="w-10 h-10 flex shrink items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                <div className="flex space-x-1">
+                  {keysRow2.map((key: any, index: any) => (
+                    <button
+                      key={key}
+                      className="w-7 h-7 flex focus:border-4 focus:border-white border items-center justify-center bg-gray-400 text-gray-800 font-bold rounded shadow-md"
                       onClick={() => { setSelectedKey(index); setselectedRow(2) }}
                     >
-                      <div className={`${showKeys ? "" : "hidden"} text-lg absolute flex justify-center items-center `}
-                        style={
-                          { opacity: transparency / 100 }
-                        }>{character} </div>
                       <img src={imgEach2[index]} alt="" className=' w-full h-full' />
-                    </div>
+                    </button>
                   ))}
                 </div>
-                <div className="flex space-x-2">
-                  {keysRow3.map((character: any, index: any) => (
-                    <div
-                      key={index}
-                      className="w-10 h-10 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                <div className="flex space-x-1">
+                  {keysRow3.map((key: any, index: any) => (
+                    <button
+                      key={key}
+                      className="w-7 h-7 flex focus:border-4 focus:border-white border items-center justify-center bg-gray-400 text-gray-800 font-bold rounded shadow-md"
                       onClick={() => { setSelectedKey(index); setselectedRow(3) }}
                     >
-                      <div className={`${showKeys ? "" : "hidden"} text-lg  absolute flex justify-center items-center `}
-                        style={
-                          { opacity: transparency / 100 }
-                        }>{character} </div>
                       <img src={imgEach3[index]} alt="" className=' w-full h-full' />
-                    </div>
+                    </button>
                   ))}
                 </div>
-                <div className=" space-x-2 hidden">
+                <div className=" space-x-1 hidden">
                   <div
-                    className="w-40 h-10 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
+                    className="w-32 h-7 flex items-center justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
                   >
                     Space
                   </div>
                 </div>
               </div>
-
             </div>
 
 
-            <div className='h-full border border-gray-700 rounded-sm w-[36%] p-5 flex flex-col gap-5'>
-              <h2>Choose your image</h2>
-              <div className='flex gap-5 w-full text-white'>
+
+            <div className='flex flex-col gap-5'>
+
+
+
+              <h2 className='text-white font-bold text-xl'>Choose your Image</h2>
+
+              <div className='flex gap-5 text-white'>
                 <Select>
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Select genre" />
@@ -261,98 +442,40 @@ function Page() {
                     <SelectItem value="system">Cartoon</SelectItem>
                   </SelectContent>
                 </Select>
-                <div className='flex justify-center items-center gap-5'>
-                  <div>
-                    <p>Show keys</p>
-                    <Checkbox className='bg-white text-white' onClick={() => setShowKeys(!showKeys)} />
-                  </div>
-                  <div className='w-[10vw]'>
-                    <p>Opacity</p>
-                    <Slider
-                      min={0}
-                      max={100}
-                      step={1}
-                      value={[transparency]}
-                      defaultValue={[0]}
-                      disabled={!showKeys}
-                      onValueChange={(value) => (setTransparency(value[0]))}
-                      className='w-full  rounded'
-                    />
-                  </div>
-                </div>
+
+
+                <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400' onClick={handleClick}>{!loading ? "Export" : "Exporting.."}</button>
 
               </div>
-
-
-              <div className='w-[60%] flex gap-3'>
-                <Input onChange={(e: any) => { setcharacter(e.target.value) }} placeholder='Name of character' />
-                <button onClick={() => { getCharacter(character) }} className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Search</button>
-
-              </div>
-
-              <div className='overflow-y-auto overflow-x-hidden h-full flex flex-wrap gap-5 pb-10  w-full'>
-                {src.map((src: any, index: any) => {
-
-                  if (src.attributes.image) {
-                    return <img key={index} onClick={() => { handleimageSet(src.attributes.image.original) }} src={src.attributes.image.original} alt="" className='w-[30%] h-[30%] ' />
-                  } else {
-                    return null
-                  }
-
-
-                })}
-              </div>
-
-
             </div>
-            <div className='h-full border border-gray-700 rounded-sm w-[20%] px-4 flex flex-col gap-7 item-center  py-3'>
-              <h2>Add your custom Images</h2>
-              <div className='w-[80%]'>
+
+
+            <div className='w-[60%] flex gap-3'>
+              <Input onChange={(e: any) => { setcharacter(e.target.value) }} placeholder='Name of character' className='w-40' />
+              <button onClick={() => { getCharacter(character) }} className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Search</button>
+            </div>
+
+            <div className='overflow-y-auto  overflow-x-hidden max-h-[40vh] flex flex-wrap gap-5 pb-10 px-3  w-full'>
+              {src.map((src: any, index: any) => {
+
+                if (src.attributes.image) {
+                  return <img key={index} onClick={() => { handleimageSet(src.attributes.image.original) }} src={src.attributes.image.original} alt="" className='w-[20%]' />
+                } else {
+                  return null
+                }
+
+
+              })}
+            </div>
+
+
+            <div className='h-full border  border-gray-700 rounded-sm w-full px-5 flex flex-col gap-7 item-center  py-5'>
+              <h2 className='font-bold text-xl'>Add your custom Images</h2>
+              <p className='text-gray-400'>Click on the picture below to add on keyboard</p>
+              <div className='w-[70%]'>
                 <Input id="picture" placeholder='custom' className='text-white' type="file" onChange={handleImageChange} />
               </div>
-              <img src={image} onClick={() => { handleimageSet(image) }} alt="" />
-
-
-            </div>
-
-            <div>
-
-
-            </div>
-          </div>
-
-
-
-
-        </div>
-
-      </div>
-      <Export row1={convertedimgEach1} row2={convertedimgEach2} row3={convertedimgEach3} loaded={loaded} />
-
-      {/*mobile view*/}
-
-
-      <div className='flex flex-col sm:hidden py-20 px-6 gap-10 text-white bg-black'>
-
-        <h2 className='text-white font-bold text-xl'>Preview</h2>
-        <div className='w-full  flex justify-center'>
-          <div className="flex flex-col items-center w-fit   rounded-lg border-[4px] justify-center p-4 space-y-2">
-            <div className="flex space-x-1">
-
-              {
-                keysRow1OnlyKeys.map((key: any, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="w-7 h-7 flex items-center object-cover justify-center bg-gray-200 text-gray-800 font-bold rounded shadow-md"
-                      onClick={() => { setSelectedKey(index); setselectedRow(1) }} >
-                      <img src={imgEach1[index]} className=' w-full h-full' />
-
-                    </div>
-                  )
-
-                })
-              }
+              <img src={image} onClick={() => { handleimageSet(image) }} alt="" className='w-[60%]' />
 
 
             </div>
@@ -445,17 +568,13 @@ function Page() {
 
         </div>
 
-      </div>
+      
 
-
-
-      {/* <button className='px-2 py-1 bg-black text-white' onClick={handleClick}>Click me</button> */}
-
-      <NewFooter />
-    </div>
-
+        {/* <button className='px-2 py-1 bg-black text-white' onClick={handleClick}>Click me</button> */ }
+        < NewFooter />
+</>
 
   )
 }
-
+}
 export default Page
