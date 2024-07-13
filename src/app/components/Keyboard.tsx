@@ -14,9 +14,9 @@ const Keyboard = ({row1,row2,row3}:any) => {
       {row1&&row1.map((key:any,index:any) => (
         <div
           key={index}
-          className="min-w-[10mm] object-contain  min-h-[10mm] max-w-[10mm] max-h-[10mm] border border-black flex items-center justify-center  text-gray-800 font-bold rounded "
+          className="min-w-[10mm] object-contain  min-h-[10mm] max-w-[10mm] max-h-[10mm]  border-black border flex items-center justify-center  text-gray-800 font-bold rounded "
         >
-        <img src={key} className='w-full h-full rounded' alt="" />
+        <img src={key} className='w-full h-full rounded' alt=""  />
         </div>
       ))}
     </div>
