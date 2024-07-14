@@ -135,12 +135,12 @@ function Page() {
   };
 
  const handleKeyColor=()=>{ 
-  if (!transparency) {
-    toast({
-      title:"Opacity 0",
-      description:"Increase opacity to make changes visible"
-    })
-  }
+  // if (!transparency) {
+  //   toast({
+  //     title:"Opacity 0",
+  //     description:"Increase opacity to make changes visible"
+  //   })
+  // }
   colorInputRef.current?.click();
   
  }
@@ -148,6 +148,9 @@ function Page() {
   useEffect(() => {
     console.log(imgEach1)
   }, [imgEach1])
+
+
+
 
   useEffect(() => {
     if (imgEach1.length == 10 && imgEach2.length == 9 && imgEach3.length == 7) {
@@ -240,9 +243,9 @@ function Page() {
                               key={index}
                               className="w-10 h-10 flex items-center focus:border-4 focus:border-white border object-cover justify-center bg-gray-400 text-gray-800 font-bold rounded shadow-md "
                               onClick={() => { setSelectedKey(index); setselectedRow(1) }} >
-                              <div className={` text-lg absolute flex justify-center items-center `}
+                              <div className={` text-lg absolute flex justify-center items-center mt-4  `}
                                 style={
-                                  { opacity: transparency / 100,
+                                  { opacity: transparency,
                                     color: textColor
                                   }
                                   
@@ -264,9 +267,9 @@ function Page() {
                           className="w-10 h-10 flex focus:border-4 focus:border-white border shrink items-center justify-center bg-gray-400 text-gray-800 font-bold rounded shadow-md"
                           onClick={() => { setSelectedKey(index); setselectedRow(2) }}
                         >
-                          <div className={` text-lg absolute flex justify-center items-center `}
+                          <div className={` text-lg absolute flex justify-center items-center mt-4  `}
                             style={
-                              { opacity: transparency / 100,
+                              { opacity: transparency,
                                 color: textColor
                               }
                             }>{character} </div>
@@ -281,9 +284,9 @@ function Page() {
                           className="w-10 h-10 flex items-center focus:border-4 border focus:border-white justify-center bg-gray-400 text-gray-800 font-bold rounded shadow-md"
                           onClick={() => { setSelectedKey(index); setselectedRow(3) }}
                         >
-                          <div className={` text-lg  absolute flex justify-center items-center `}
+                          <div className={` text-lg  absolute flex justify-center items-center mt-4  `}
                             style={
-                              { opacity: transparency / 100,
+                              { opacity: transparency,
                                 color: textColor
                                }
                             }>{character} </div>
@@ -331,7 +334,7 @@ function Page() {
                     {src.map((src: any, index: any) => {
 
                       if (src.attributes.image) {
-                        return <img key={index} onClick={() => { handleimageSet(src.attributes.image.original) }} src={src.attributes.image.original} alt="" className='w-[30%] h-[30%] ' />
+                        return <img key={index} onClick={() => { handleimageSet(src.attributes.image.original) }} src={src.attributes.image.original} alt="" className='w-[20%]  ' />
                       } else {
                         return null
                       }
@@ -358,18 +361,20 @@ function Page() {
                         <p>Keys Opacity</p>
                         <Slider
                           min={0}
-                          max={100}
-                          step={1}
+                          max={1}
+                          step={0.01}
                           value={[transparency]}
                           defaultValue={[0]}
                        
                           onValueChange={(value:any) => (setTransparency(value[0]))}
                           className='w-full  rounded'
                         />
-                        <div className=' flex justify-center flex-col gap-1'>
+                        
+                      </div>
+                      <div className=' flex justify-center flex-col  gap-4'>
                           Key Color
                           <Button onClick={()=>handleKeyColor()} 
-                          className='h-4 w-2 rounded-none  ' 
+                          className='h-7 w-5 rounded-sm border ' 
                            style={
                             {background: textColor}
                            }
@@ -378,7 +383,6 @@ function Page() {
                           <Input value={textColor}  ref={colorInputRef} type="color" onChange={(e)=>handleColorChange(e)} className='opacity-0 w-0 h-0'/>
 
                         </div>
-                      </div>
                     </div>
 
 
@@ -414,11 +418,11 @@ function Page() {
                           key={index}
                           className="w-7 h-7 flex focus:border-4 focus:border-white border items-center object-cover justify-center bg-gray-400 text-gray-800 font-bold rounded shadow-md"
                           onClick={() => { setSelectedKey(index); setselectedRow(1) }} >
-                             <div className={` text-sm  absolute flex justify-center items-center `}
+                             <div className={` text-sm  absolute flex justify-center items-center  mt-[10px] `}
                             style={
-                              { opacity: transparency / 100 }
+                              { opacity: transparency }
                             }>{character} </div>
-                          <img src={imgEach1[index]} className=' w-full h-full' />
+                         {imgEach1[index] && <img src={imgEach1[index]} className=' w-full h-full'  />}
 
                         </button>
                       )
@@ -435,11 +439,11 @@ function Page() {
                       className="w-7 h-7 flex focus:border-4 focus:border-white border items-center justify-center bg-gray-400 text-gray-800 font-bold rounded shadow-md"
                       onClick={() => { setSelectedKey(index); setselectedRow(2) }}
                     >
-                       <div  className={` text-sm  absolute flex justify-center items-center `}
+                       <div  className={` text-sm  absolute flex justify-center items-center mt-[10px]  `}
                             style={
-                              { opacity: transparency / 100 }
+                              { opacity: transparency  }
                             }>{character} </div>
-                      <img src={imgEach2[index]} alt="" className=' w-full h-full' />
+                       {imgEach2[index] && <img src={imgEach2[index]} className=' w-full h-full'  />}
                     </button>
                   ))}
                 </div>
@@ -450,11 +454,11 @@ function Page() {
                       className="w-7 h-7 flex focus:border-4 focus:border-white border items-center justify-center bg-gray-400 text-gray-800 font-bold rounded shadow-md"
                       onClick={() => { setSelectedKey(index); setselectedRow(3) }}
                     >
-                       <div className={` text-sm  absolute flex justify-center items-center `}
+                       <div className={` text-sm  absolute flex justify-center items-center mt-[10px]  `}
                             style={
-                              { opacity: transparency / 100 }
+                              { opacity: transparency  }
                             }>{character} </div>
-                      <img src={imgEach3[index]} alt="" className=' w-full h-full' />
+                      {imgEach3[index] && <img src={imgEach3[index]} className=' w-full h-full'  />}
                     </button>
                   ))}
                 </div>
@@ -475,8 +479,8 @@ function Page() {
                         <p>Keys Opacity</p>
                         <Slider
                           min={0}
-                          max={100}
-                          step={1}
+                          max={1}
+                          step={0.01}
                           value={[transparency]}
                           defaultValue={[0]}
                         
