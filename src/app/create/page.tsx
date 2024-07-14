@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import NewFooter from '../components/NewFooter'
 import Navbar from '../components/Navbar'
 import Keyboard from '../components/Keyboard'
@@ -9,7 +9,7 @@ import axios from 'axios'
 import { RocketIcon } from "@radix-ui/react-icons"
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/components/ui/use-toast"
-
+import { Button } from '@/components/ui/button'
 
 import { Input } from "@/components/ui/input"
 
@@ -34,6 +34,7 @@ import Export from '../components/Export'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Slider } from '@/components/ui/slider'
 import { opacity } from 'html2canvas/dist/types/css/property-descriptors/opacity'
+import { text } from 'stream/consumers'
 
 
 
@@ -54,9 +55,10 @@ function Page() {
   const [imgEach3, setimgEach3] = useState([''])
   const [selectedRow, setselectedRow] = useState(1)
   const [image, setimage] = useState('')
-  const [showKeys, setShowKeys] = useState(false)
+  // const [showKeys, setShowKeys] = useState(false)
   const [transparency, setTransparency] = useState<number>(0)
-
+  const [textColor, setTextColor] = useState("#000000")
+  const colorInputRef = useRef<HTMLInputElement>(null);
   const getCharacter = async (character: string) => {
     try {
 
@@ -128,8 +130,20 @@ function Page() {
   const keysRow2 = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'];
   const keysRow3 = ['Z', 'X', 'C', 'V', 'B', 'N', 'M'];
 
+  const handleColorChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    setTextColor(e.target.value);
+  };
 
-
+ const handleKeyColor=()=>{ 
+  if (!transparency) {
+    toast({
+      title:"Opacity 0",
+      description:"Increase opacity to make changes visible"
+    })
+  }
+  colorInputRef.current?.click();
+  
+ }
 
   useEffect(() => {
     console.log(imgEach1)
@@ -228,9 +242,12 @@ function Page() {
                               onClick={() => { setSelectedKey(index); setselectedRow(1) }} >
                               <div className={` text-lg absolute flex justify-center items-center `}
                                 style={
-                                  { opacity: transparency / 100 }
+                                  { opacity: transparency / 100,
+                                    color: textColor
+                                  }
+                                  
                                 }>{character} </div>
-                              <img src={imgEach1[index]} className=' w-full h-full' />
+                              {imgEach1[index] && <img src={imgEach1[index]} className=' w-full h-full'  />}
 
                             </button>
                           )
@@ -249,9 +266,11 @@ function Page() {
                         >
                           <div className={` text-lg absolute flex justify-center items-center `}
                             style={
-                              { opacity: transparency / 100 }
+                              { opacity: transparency / 100,
+                                color: textColor
+                              }
                             }>{character} </div>
-                          <img src={imgEach2[index]} alt="" className=' w-full h-full' />
+                          {imgEach2[index] && <img src={imgEach2[index]} alt="" className=' w-full h-full' />}
                         </button>
                       ))}
                     </div>
@@ -264,9 +283,11 @@ function Page() {
                         >
                           <div className={` text-lg  absolute flex justify-center items-center `}
                             style={
-                              { opacity: transparency / 100 }
+                              { opacity: transparency / 100,
+                                color: textColor
+                               }
                             }>{character} </div>
-                          <img src={imgEach3[index]} alt="" className=' w-full h-full' />
+                          {imgEach3[index] && <img src={imgEach3[index]} alt="" className=' w-full h-full' />}
                         </button>
                       ))}
                     </div>
@@ -345,6 +366,18 @@ function Page() {
                           onValueChange={(value:any) => (setTransparency(value[0]))}
                           className='w-full  rounded'
                         />
+                        <div className=' flex justify-center flex-col gap-1'>
+                          Key Color
+                          <Button onClick={()=>handleKeyColor()} 
+                          className='h-4 w-2 rounded-none  ' 
+                           style={
+                            {background: textColor}
+                           }
+                           ></Button>
+
+                          <Input value={textColor}  ref={colorInputRef} type="color" onChange={(e)=>handleColorChange(e)} className='opacity-0 w-0 h-0'/>
+
+                        </div>
                       </div>
                     </div>
 
