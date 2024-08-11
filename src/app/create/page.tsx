@@ -62,7 +62,7 @@ function Page() {
   const getCharacter = async (character: string) => {
     try {
 
-      const response = await axios.get(`https://kitsu.io/api/edge/characters?filter[name]=${character}&Page[limit]=10&Page[offset]=0`)
+      const response = await axios.get(`https://kitsu.app/api/edge/characters?filter[name]=${character}&Page[limit]=10&Page[offset]=0`)
       // const response = await axios.get(`https://kitsu.io/api/edge/anime?filter[text]=${character}`)
 
       setsrc(response.data.data)
