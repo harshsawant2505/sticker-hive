@@ -218,8 +218,11 @@ function Page() {
                     <PopoverTrigger className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400'>Share</PopoverTrigger>
                     <PopoverContent>Coming soon.</PopoverContent>
                   </Popover>
-
-                  <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400 '>. . .</button>
+                  <Popover>
+                    <PopoverTrigger className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400 '>. . .</PopoverTrigger>
+                    <PopoverContent>Coming soon.</PopoverContent>
+                  </Popover>
+                  {/* <button className='py-2 px-4 bg-gray-700 rounded-md font-bold text-sm hover:bg-gray-400 '></button> */}
 
 
                 </div>
