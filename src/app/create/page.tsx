@@ -403,7 +403,7 @@ function Page() {
             </div>
 
           </div>
-          <Export row1={convertedimgEach1} row2={convertedimgEach2} row3={convertedimgEach3} loaded={loaded} />
+          <Export row1={convertedimgEach1} row2={convertedimgEach2} row3={convertedimgEach3} loaded={loaded} transparency={transparency} />
 
           {/*mobile view*/}
 

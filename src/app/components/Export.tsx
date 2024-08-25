@@ -9,7 +9,7 @@ import Keyboard from './Keyboard';
 
 
 
-const Export = ({row1,row2,row3,loaded}:any) => {
+const Export = ({row1,row2,row3,loaded,transparency}:any) => {
   const divRef = useRef<HTMLDivElement>(null);
 
  useEffect(() => {
@@ -65,9 +65,9 @@ const Export = ({row1,row2,row3,loaded}:any) => {
   
 
   return (
-    <div className=' top-0 absolute  overflow-x-hidden z-0 '>
+    <div className=' top-0   overflow-x-hidden z-10 '>
       <div ref={divRef} className=" border absolute  border-black w-[210mm]  h-[297mm] flex justify-center items-center  ">
-        <Keyboard row1={row1} row2={row2} row3={row3} />
+        <Keyboard row1={row1} row2={row2} row3={row3} transparency = {transparency} />
       </div>
       <button onClick={handleExport} className='px-2 py-1 absolute bg-black text-white'>Export as PDF</button>
     </div>

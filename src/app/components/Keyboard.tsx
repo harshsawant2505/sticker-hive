@@ -16,13 +16,13 @@ const Keyboard = ({row1,row2,row3,textColor,transparency}:any) => {
           key={index}
           className="min-w-[10mm] object-cover  min-h-[10mm] max-w-[10mm] max-h-[10mm]  border-black border flex items-center justify-center  text-gray-800 font-bold rounded "
         >
-           <div className={` text-lg absolute flex justify-center items-center  `}
+         {transparency != 0&&  <div className={` text-lg absolute flex justify-center items-center  `}
                                 style={
                                   { opacity: transparency,
                                     color: textColor
                                   }
                                   
-                                }>{keysRow1[index]}</div>
+                                }>{keysRow1[index]}</div>}
         <img src={key} className='w-full h-full rounded' alt=""  />
         </div>
       ))}
@@ -33,13 +33,13 @@ const Keyboard = ({row1,row2,row3,textColor,transparency}:any) => {
           key={index}
           className="min-w-[10mm] min-h-[10mm] object-contain max-w-[10mm] max-h-[10mm] flex items-center justify-center  text-gray-800 font-bold rounded border border-black"
         >
-           <div className={` text-lg absolute flex justify-center items-center  `}
+          {transparency != 0&& <div className={` text-lg absolute flex justify-center items-center  `}
                                 style={
                                   { opacity: transparency,
                                     color: textColor
                                   }
                                   
-                                }>{keysRow2[index]}</div>
+                                }>{keysRow2[index]}</div> }
        <img src={key} className='w-full h-full rounded z-0' alt="" />
         </div>
       ))}
@@ -50,13 +50,13 @@ const Keyboard = ({row1,row2,row3,textColor,transparency}:any) => {
           key={index}
           className="min-w-[10mm] min-h-[10mm] object-contain max-w-[10mm] max-h-[10mm] flex items-center justify-center  text-gray-800 font-bold rounded border border-black"
         >
-           <div className={` text-lg absolute flex justify-center items-center  `}
+          {transparency != 0&& <div className={` text-lg absolute flex justify-center items-center  `}
                                 style={
                                   { opacity: transparency,
                                     color: textColor
                                   }
                                   
-                                }>{keysRow3[index]}</div>
+                                }>{keysRow3[index]}</div>}
           <img src={key} alt="" className='w-full h-full rounded' />
         </div>
       ))}
