@@ -65,7 +65,7 @@ const Export = ({row1,row2,row3,loaded,transparency}:any) => {
   
 
   return (
-    <div className=' top-0   overflow-x-hidden z-10 '>
+    <div className=' top-0   overflow-x-hidden z-10 absolute '>
       <div ref={divRef} className=" border absolute  border-black w-[210mm]  h-[297mm] flex justify-center items-center  ">
         <Keyboard row1={row1} row2={row2} row3={row3} transparency = {transparency} />
       </div>

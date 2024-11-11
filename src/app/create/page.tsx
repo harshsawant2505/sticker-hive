@@ -233,7 +233,7 @@ function Page() {
               <div className=' w-full full h-[90%]  flex gap-7  py-10 px-2 pl-4 justify-center'>
 
 
-                <div className='h-full git rounded-sm w-[40%] flex items-center justify-center '> {/* keyboard div*/}
+                <div className='h-full  git rounded-sm w-[40%] flex items-center justify-center '> {/* keyboard div*/}
 
 
                   <div className="flex flex-col items-center w-fit rounded-lg border-[4px] justify-center p-4 space-y-2">
@@ -411,7 +411,7 @@ function Page() {
 
             <h2 className='text-white font-bold text-xl'>Preview</h2>
             <div className='w-full flex flex-col gap-4   '>
-              <div className="flex flex-col  items-center w-fit self-center   rounded-lg border-[4px] justify-center p-2 space-y-2">
+              <div className="flex flex-col  items-center w-fit self-center    rounded-lg border-[4px] justify-center p-2 space-y-2">
                 <div className="flex space-x-1">
 
                   {
